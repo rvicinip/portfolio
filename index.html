@@ -1,0 +1,2312 @@
+<!doctype html>
+<!--
+  Reinaldo Viccini — Portfolio 2026-09-01
+  =======================================
+  Single-page professional portfolio for hiring managers/recruiters.
+  Built on Signal Slate Prism (components only, no invented styles).
+  Writing standard: vocabulary 10th grade, every technical term explained on first use,
+  exact numbers with a source, glossary footer line.
+-->
+<html lang="en" data-theme="editorial-ivory" data-measure="screen">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Reinaldo Viccini — Quality &amp; Engineering Leader, AI-Enhanced Quality Systems</title>
+    <style>
+/* Signal Slate Prism - Global Theme System
+ * Modular CSS for token-efficient documents
+ *
+ * ARCHITECTURE:
+ * - Base styles: typography, layout, structure (common to all themes)
+ * - Theme variables: colors only (22 photosensitive themes)
+ * - Usage: <html data-theme="forest-depth" data-measure="screen"> + global.css
+ *
+ * TOKEN SAVINGS: ~70% reduction vs inline CSS
+ *
+ * THEMES AVAILABLE:
+ * CLASSIC / CALMING (7):
+ * 1. neon-coral - Vibrant dark with coral accents
+ * 2. warm-charcoal - Evening use, reduced blue light
+ * 3. forest-depth - Extended reading, most eye-relaxing
+ * 4. sepia-warmth (DEFAULT) - Daytime, light sensitivity, warm brown tones
+ * 5. orchid-twilight - Anxiety reduction, calming
+ * 6. neutral-balance - Colorblind users, maximum accessibility
+ * 7. solarised-warm - Classic accessibility, proven design
+ *
+ * VIBRANT / MODERN (6):
+ * 8. electric-mint - Vibrant mint green, modern tech feel
+ * 9. crimson-ember - Bold energetic warm reds
+ * 10. azure-neon - Electric blue-cyan tech vibe
+ * 11. golden-horizon - Warm vibrant gold optimism
+ * 12. magenta-dream - Bold pink-purple creative energy
+ * 13. citrus-burst - Vibrant lime-orange sunshine
+ *
+ * PROFESSIONAL / EXECUTIVE (4):
+ * 14. professional-slate - Executive business documents, formal reports
+ * 15. academic-parchment - Scholarly papers, thesis, academic reading
+ * 16. corporate-navy - Boardroom presentations, executive summary
+ * 17. editorial-ivory - Magazine articles, long-form journalism
+ *
+ * ACADEMIC VARIATIONS (5):
+ * 18. academic-cool - Gray-beige scholarly, neutral tone
+ * 19. academic-sepia - Deep vintage sepia, archive feel
+ * 20. academic-sage - Green-gray, natural sciences
+ * 21. academic-rose - Rose tint, humanities and arts
+ * 22. academic-slate - Blue-gray, STEM technical papers
+ */
+
+/* Motion tokens (duration/easing/transition presets + reduced-motion guard).
+   Imported so the single-link path (global.css alone) is no longer motionless. */
+/* Signal Slate Prism - Motion & Animation Tokens */
+/* Consistent timing for professional UI feel */
+
+:root {
+  /* ============================================
+     DURATION TOKENS
+     ============================================ */
+  
+  /* Instant - no animation */
+  --duration-instant: 0ms;
+  
+  /* Fast - micro interactions (hover, focus) */
+  --duration-fast: 150ms;
+  
+  /* Normal - standard transitions */
+  --duration-normal: 250ms;
+  
+  /* Slow - emphasis, important changes */
+  --duration-slow: 350ms;
+  
+  /* Complex - multi-step animations */
+  --duration-complex: 500ms;
+  
+  /* Semantic duration tokens */
+  --duration-hover: var(--duration-fast);
+  --duration-focus: var(--duration-fast);
+  --duration-active: var(--duration-fast);
+  --duration-expand: var(--duration-normal);
+  --duration-collapse: var(--duration-normal);
+  --duration-fade: var(--duration-normal);
+  --duration-slide: var(--duration-normal);
+  --duration-scale: var(--duration-fast);
+  --duration-modal: var(--duration-slow);
+  --duration-drawer: var(--duration-slow);
+  --duration-toast: var(--duration-complex);
+  --duration-spinner: 1s;           /* Infinite loop timing */
+  --duration-skeleton: 2s;          /* Shimmer timing */
+  
+  /* ============================================
+     EASING TOKENS
+     ============================================ */
+  
+  /* Linear - constant speed */
+  --ease-linear: linear;
+  
+  /* Standard easings */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Custom easings for polished feel */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);      /* Bouncy */
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Overshoot */
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);           /* Apple-style */
+  --ease-dramatic: cubic-bezier(0.87, 0, 0.13, 1);        /* Strong contrast */
+  
+  /* Semantic easing tokens */
+  --ease-enter: var(--ease-out);        /* Elements appearing */
+  --ease-exit: var(--ease-in);          /* Elements disappearing */
+  --ease-move: var(--ease-in-out);      /* Moving elements */
+  --ease-emphasis: var(--ease-spring);  /* Interactive feedback */
+  
+  /* ============================================
+     STANDARD TRANSITION PRESETS
+     ============================================ */
+  
+  --transition-fast: var(--duration-fast) var(--ease-out);
+  --transition-normal: var(--duration-normal) var(--ease-in-out);
+  --transition-slow: var(--duration-slow) var(--ease-smooth);
+  --transition-emphasis: var(--duration-fast) var(--ease-spring);
+  --transition-fade: opacity var(--transition-normal);
+  --transition-scale: transform var(--transition-fast);
+  --transition-colors: background-color var(--transition-fast),
+                       border-color var(--transition-fast),
+                       color var(--transition-fast),
+                       fill var(--transition-fast),
+                       stroke var(--transition-fast);
+  --transition-shadow: box-shadow var(--transition-fast);
+  --transition-transform: transform var(--transition-fast);
+  --transition-all: all var(--transition-normal);
+  
+  /* ============================================
+     ANIMATION KEYFRAMES (reference values)
+     ============================================ */
+  
+  --animation-spin: spin 1s linear infinite;
+  --animation-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animation-bounce: bounce 1s infinite;
+  --animation-shimmer: shimmer 2s linear infinite;
+  --animation-fade-in: fadeIn var(--duration-normal) var(--ease-out);
+  --animation-fade-out: fadeOut var(--duration-normal) var(--ease-in);
+  --animation-slide-up: slideUp var(--duration-normal) var(--ease-out);
+  --animation-slide-down: slideDown var(--duration-normal) var(--ease-out);
+  --animation-scale-in: scaleIn var(--duration-fast) var(--ease-spring);
+}
+
+/* ============================================
+   KEYFRAME DEFINITIONS
+   ============================================ */
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ============================================
+   REDUCED MOTION SUPPORT
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration-normal: 0ms;
+    --duration-slow: 0ms;
+    --duration-complex: 0ms;
+    --animation-spin: none;
+    --animation-pulse: none;
+    --animation-bounce: none;
+    --animation-shimmer: none;
+  }
+  
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* ============================================
+   DEFAULT (:root) + THEME 4: SEPIA WARMTH
+   Best for: Daytime, light sensitivity.
+   Placed FIRST on purpose: :root is the no-theme default, and because it shares
+   specificity with [data-theme="x"], every theme block below overrides it.
+   ============================================ */
+[data-theme="sepia-warmth"],
+:root {
+  --bg: #f5ede0;
+  --surface: #faf6f0;
+  --surface-2: #fffaf0;
+  --surface-3: #e8e0d0;
+  --ink: #2a2820;
+  --ink-secondary: #4a4538;
+  --muted: #6a6050;
+  --line: #d8d0c0;
+  --line-strong: #c8c0b0;
+  --primary: #8a6a40;
+  --primary-hover: #7a5a30;
+  --primary-soft: rgba(138, 106, 64, 0.12);
+  --coral: #b06050;
+  --amber: #9a7a30;
+  --green: #5a6a3a;
+  --cyan: #406060;
+  --violet: #705060;
+  --success: #4a6038;
+  --warning: #8a7020;
+  --error: #a04030;
+  --info: #406080;
+  --shadow-soft: 0 18px 52px rgba(74, 69, 56, 0.08);
+  --shadow-card: 0 10px 28px rgba(74, 69, 56, 0.06);
+  color-scheme: light;
+}
+
+/* ============================================
+   THEME 1: NEON CORAL
+   Vibrant dark with coral accents
+   ============================================ */
+[data-theme="neon-coral"] {
+  --bg: #1a0f0f;
+  --surface: #2a1818;
+  --surface-2: #3d2520;
+  --surface-3: #522e26;
+  --ink: #fff5f2;
+  --ink-secondary: #ffb8a8;
+  --muted: #c48b7d;
+  --line: #522e26;
+  --line-strong: #6d3d32;
+  --primary: #ff6b6b;
+  --primary-hover: #ff8e8e;
+  --primary-soft: rgba(255, 107, 107, 0.15);
+  --coral: #ff6b6b;
+  --amber: #fbbf24;
+  --green: #4ade80;
+  --cyan: #22d3ee;
+  --violet: #c084fc;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --error: #fb7185;
+  --info: #22d3ee;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 2: WARM CHARCOAL
+   Best for: Evening use, reduced blue light
+   ============================================ */
+[data-theme="warm-charcoal"] {
+  --bg: #1a1714;
+  --surface: #252018;
+  --surface-2: #2e2820;
+  --surface-3: #383028;
+  --ink: #f5ede0;
+  --ink-secondary: #d4c8b8;
+  --muted: #a89888;
+  --line: #383028;
+  --line-strong: #4a4035;
+  --primary: #d4a05a;
+  --primary-hover: #e6b06a;
+  --primary-soft: rgba(212, 160, 90, 0.15);
+  --coral: #d4a090;
+  --amber: #d4a05a;
+  --green: #88a878;
+  --cyan: #7a9a8a;
+  --violet: #b8a0a8;
+  --success: #88a878;
+  --warning: #d4b060;
+  --error: #c87060;
+  --info: #7a9ab0;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 3: FOREST DEPTH
+   Best for: Extended reading, OLED screens
+   Clinically most eye-relaxing
+   ============================================ */
+[data-theme="forest-depth"] {
+  --bg: #141a16;
+  --surface: #1a221c;
+  --surface-2: #202a22;
+  --surface-3: #263228;
+  --ink: #e8f0e8;
+  --ink-secondary: #c8d4c8;
+  --muted: #98a898;
+  --line: #263228;
+  --line-strong: #324035;
+  --primary: #88a878;
+  --primary-hover: #98b888;
+  --primary-soft: rgba(136, 168, 120, 0.15);
+  --coral: #c89080;
+  --amber: #b8a060;
+  --green: #90a880;
+  --cyan: #609080;
+  --violet: #9080a0;
+  --success: #78a868;
+  --warning: #c0a050;
+  --error: #b86058;
+  --info: #7890a8;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* THEME 4: SEPIA WARMTH (DEFAULT) — relocated to the top of this file (it also
+   carries the :root default). It MUST precede every [data-theme] block: :root and
+   [data-theme="x"] share specificity (0,1,0), so source order decides. While it
+   lived here, it silently overrode the themes defined above it (neon-coral,
+   warm-charcoal, forest-depth), forcing them all to this sepia palette. */
+
+/* ============================================
+   THEME 5: ORCHID TWILIGHT
+   Best for: Anxiety reduction, calming
+   Purple tones reduce amygdala activity
+   ============================================ */
+[data-theme="orchid-twilight"] {
+  --bg: #1a1418;
+  --surface: #221a22;
+  --surface-2: #2a202a;
+  --surface-3: #322830;
+  --ink: #f0e8f0;
+  --ink-secondary: #d8c8d8;
+  --muted: #a898a8;
+  --line: #322830;
+  --line-strong: #403840;
+  --primary: #b898b8;
+  --primary-hover: #c8a8c8;
+  --primary-soft: rgba(184, 152, 184, 0.15);
+  --coral: #d8a8a0;
+  --amber: #d4b898;
+  --green: #a8b0a0;
+  --cyan: #90b0b8;
+  --violet: #c0a0b0;
+  --success: #98b898;
+  --warning: #d4c898;
+  --error: #c89898;
+  --info: #a0b0c8;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 6: NEUTRAL BALANCE
+   Best for: Colorblind users, maximum accessibility
+   ============================================ */
+[data-theme="neutral-balance"] {
+  --bg: #1c1e22;
+  --surface: #25282c;
+  --surface-2: #2e3236;
+  --surface-3: #363a40;
+  --ink: #e8ecf0;
+  --ink-secondary: #c8cdd4;
+  --muted: #989ca4;
+  --line: #363a40;
+  --line-strong: #44484f;
+  --primary: #56a0a0;
+  --primary-hover: #68b0b0;
+  --primary-soft: rgba(86, 160, 160, 0.15);
+  --coral: #d09080;
+  --amber: #c89848;
+  --green: #88a868;
+  --cyan: #56a0a0;
+  --violet: #9888a0;
+  --success: #78a858;
+  --warning: #c8a038;
+  --error: #c86058;
+  --info: #68a0b8;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 7: SOLARISED WARM
+   Best for: Classic accessibility, proven design
+   ============================================ */
+[data-theme="solarised-warm"] {
+  --bg: #1a1816;
+  --surface: #252220;
+  --surface-2: #2e2a26;
+  --surface-3: #36322e;
+  --ink: #e8e4dc;
+  --ink-secondary: #c8c4b8;
+  --muted: #989488;
+  --line: #36322e;
+  --line-strong: #44403a;
+  --primary: #b8a060;
+  --primary-hover: #c8b070;
+  --primary-soft: rgba(184, 160, 96, 0.15);
+  --coral: #d08068;
+  --amber: #b8a060;
+  --green: #88a868;
+  --cyan: #60a090;
+  --violet: #a080a0;
+  --success: #78a858;
+  --warning: #c8a848;
+  --error: #c86050;
+  --info: #6890a8;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 8: ELECTRIC MINT
+   Vibrant modern tech - energizing but safe
+   ============================================ */
+[data-theme="electric-mint"] {
+  --bg: #0f1a18;
+  --surface: #162824;
+  --surface-2: #1e3530;
+  --surface-3: #264038;
+  --ink: #e8f5f0;
+  --ink-secondary: #a8d4c0;
+  --muted: #78b098;
+  --line: #264038;
+  --line-strong: #305048;
+  --primary: #50ffb0;
+  --primary-hover: #70ffc8;
+  --primary-soft: rgba(80, 255, 176, 0.18);
+  --coral: #ff7a7a;
+  --amber: #ffd060;
+  --green: #50ffb0;
+  --cyan: #60e8e0;
+  --violet: #d090e0;
+  --success: #50ffb0;
+  --warning: #ffd060;
+  --error: #ff6b6b;
+  --info: #60e8e0;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 9: CRIMSON EMBER
+   Bold energetic - warm vibrant reds
+   ============================================ */
+[data-theme="crimson-ember"] {
+  --bg: #1a0f12;
+  --surface: #28181c;
+  --surface-2: #382028;
+  --surface-3: #482830;
+  --ink: #f5e8e8;
+  --ink-secondary: #e8b8b0;
+  --muted: #c09088;
+  --line: #482830;
+  --line-strong: #583038;
+  --primary: #ff5a5a;
+  --primary-hover: #ff7a7a;
+  --primary-soft: rgba(255, 90, 90, 0.2);
+  --coral: #ff7a7a;
+  --amber: #ffb060;
+  --green: #70d898;
+  --cyan: #60d0d8;
+  --violet: #e0a8c8;
+  --success: #70d898;
+  --warning: #ffb060;
+  --error: #ff5a5a;
+  --info: #60d0d8;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 10: AZURE NEON
+   Electric blue-cyan vibrant tech feel
+   ============================================ */
+[data-theme="azure-neon"] {
+  --bg: #0f141a;
+  --surface: #161e28;
+  --surface-2: #1e2838;
+  --surface-3: #263048;
+  --ink: #e8f0f8;
+  --ink-secondary: #a8d0f0;
+  --muted: #88b0d8;
+  --line: #263048;
+  --line-strong: #304058;
+  --primary: #50d0ff;
+  --primary-hover: #70e0ff;
+  --primary-soft: rgba(80, 208, 255, 0.2);
+  --coral: #ff8a80;
+  --amber: #ffd070;
+  --green: #70f0a0;
+  --cyan: #50d0ff;
+  --violet: #c8a0f0;
+  --success: #70f0a0;
+  --warning: #ffd070;
+  --error: #ff6b6b;
+  --info: #50d0ff;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 11: GOLDEN HORIZON
+   Warm vibrant gold - energizing optimism
+   ============================================ */
+[data-theme="golden-horizon"] {
+  --bg: #1a1610;
+  --surface: #282218;
+  --surface-2: #383020;
+  --surface-3: #483e28;
+  --ink: #f8f0e0;
+  --ink-secondary: #e8d8b8;
+  --muted: #c8b090;
+  --line: #483e28;
+  --line-strong: #584e30;
+  --primary: #ffc850;
+  --primary-hover: #ffd870;
+  --primary-soft: rgba(255, 200, 80, 0.2);
+  --coral: #ff8a70;
+  --amber: #ffc850;
+  --green: #90d860;
+  --cyan: #60e8d0;
+  --violet: #e0b8e0;
+  --success: #90d860;
+  --warning: #ffc850;
+  --error: #ff6b6b;
+  --info: #60e8d0;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 12: MAGENTA DREAM
+   Bold pink-purple vibrant creative energy
+   ============================================ */
+[data-theme="magenta-dream"] {
+  --bg: #1a1018;
+  --surface: #281824;
+  --surface-2: #382030;
+  --surface-3: #482838;
+  --ink: #f8e8f0;
+  --ink-secondary: #f0c8e0;
+  --muted: #e0a8c8;
+  --line: #482838;
+  --line-strong: #583040;
+  --primary: #ff70b0;
+  --primary-hover: #ff90c8;
+  --primary-soft: rgba(255, 112, 176, 0.2);
+  --coral: #ff9090;
+  --amber: #ffd0a0;
+  --green: #90f0c0;
+  --cyan: #60e8f0;
+  --violet: #e8a8f0;
+  --success: #90f0c0;
+  --warning: #ffd0a0;
+  --error: #ff6b6b;
+  --info: #60e8f0;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 13: CITRUS BURST
+   Vibrant lime-orange energetic sunshine
+   ============================================ */
+[data-theme="citrus-burst"] {
+  --bg: #16180f;
+  --surface: #202816;
+  --surface-2: #2c381e;
+  --surface-3: #384826;
+  --ink: #f0f5e0;
+  --ink-secondary: #d8e8b8;
+  --muted: #b8d090;
+  --line: #384826;
+  --line-strong: #405830;
+  --primary: #c8ff40;
+  --primary-hover: #d8ff60;
+  --primary-soft: rgba(200, 255, 64, 0.2);
+  --coral: #ff9a60;
+  --amber: #ffc040;
+  --green: #c8ff40;
+  --cyan: #60f0d8;
+  --violet: #e8a0f0;
+  --success: #c8ff40;
+  --warning: #ffc040;
+  --error: #ff6b6b;
+  --info: #60f0d8;
+  --shadow-soft: 0 18px 52px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 10px 28px rgba(0, 0, 0, 0.3);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 14: PROFESSIONAL SLATE
+   Executive business documents, formal reports
+   ============================================ */
+[data-theme="professional-slate"] {
+  --bg: #1a1f24;
+  --surface: #242b32;
+  --surface-2: #2d363f;
+  --surface-3: #36404a;
+  --ink: #f0f4f8;
+  --ink-secondary: #b8c4d0;
+  --muted: #8a98a8;
+  --line: #36404a;
+  --line-strong: #405060;
+  --primary: #5a8ab8;
+  --primary-hover: #7aa8d0;
+  --primary-soft: rgba(90, 138, 184, 0.15);
+  --coral: #c88880;
+  --amber: #d4a868;
+  --green: #78b898;
+  --cyan: #68b0c0;
+  --violet: #a090b8;
+  --success: #78b898;
+  --warning: #d4a868;
+  --error: #c87068;
+  --info: #68b0c0;
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 15: ACADEMIC PARCHMENT
+   Scholarly papers, thesis, academic reading
+   ============================================ */
+[data-theme="academic-parchment"] {
+  --bg: #dcd5c8;
+  --surface: #e5e0d5;
+  --surface-2: #ebe6dc;
+  --surface-3: #d6d0c4;
+  --ink: #2a2824;
+  --ink-secondary: #4a4840;
+  --muted: #7a7568;
+  --line: #d0c8b8;
+  --line-strong: #c8c0b0;
+  --primary: #6b5040;
+  --primary-hover: #5a4030;
+  --primary-soft: rgba(107, 80, 64, 0.1);
+  --coral: #a06050;
+  --amber: #8a7038;
+  --green: #5a7050;
+  --cyan: #506870;
+  --violet: #705860;
+  --success: #5a7050;
+  --warning: #8a7038;
+  --error: #a05040;
+  --info: #506870;
+  --shadow-soft: 0 12px 40px rgba(60, 56, 48, 0.12);
+  --shadow-card: 0 8px 24px rgba(60, 56, 48, 0.1);
+  color-scheme: light;
+}
+
+/* ============================================
+   THEME 16: CORPORATE NAVY
+   Boardroom presentations, executive summary
+   ============================================ */
+[data-theme="corporate-navy"] {
+  --bg: #161c28;
+  --surface: #1e2636;
+  --surface-2: #263044;
+  --surface-3: #2e3a52;
+  --ink: #e8ecf4;
+  --ink-secondary: #b8c4d8;
+  --muted: #8898b8;
+  --line: #2e3a52;
+  --line-strong: #384860;
+  --primary: #6080b0;
+  --primary-hover: #80a0d0;
+  --primary-soft: rgba(96, 128, 176, 0.15);
+  --coral: #c08078;
+  --amber: #d0a060;
+  --green: #70a890;
+  --cyan: #68a8c0;
+  --violet: #9890c0;
+  --success: #70a890;
+  --warning: #d0a060;
+  --error: #c06860;
+  --info: #68a8c0;
+  --shadow-soft: 0 12px 40px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.25);
+  color-scheme: dark;
+}
+
+/* ============================================
+   THEME 17: EDITORIAL IVORY
+   Magazine articles, long-form journalism
+   ============================================ */
+[data-theme="editorial-ivory"] {
+  --bg: #f0ede8;
+  --surface: #f8f6f2;
+  --surface-2: #fefcfa;
+  --surface-3: #e8e5e0;
+  --ink: #2a2826;
+  --ink-secondary: #504a46;
+  --muted: #888078;
+  --line: #e0ddd8;
+  --line-strong: #d0ccc8;
+  --primary: #4a6888;
+  --primary-hover: #385878;
+  --primary-soft: rgba(74, 104, 136, 0.1);
+  --coral: #b87068;
+  --amber: #b89850;
+  --green: #608060;
+  --cyan: #508090;
+  --violet: #806080;
+  --success: #608060;
+  --warning: #b89850;
+  --error: #b05048;
+  --info: #508090;
+  --shadow-soft: 0 12px 40px rgba(60, 58, 54, 0.1);
+  --shadow-card: 0 8px 24px rgba(60, 58, 54, 0.08);
+  color-scheme: light;
+}
+
+/* ============================================
+   BASE STYLES (Common to all themes)
+   Typography, layout, structure - NO colors here
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Layout width presets — set on <html data-measure="..."> */
+:root {
+  --doc-max-width: min(75rem, 92vw);       /* screen (default): ~1200px */
+  --doc-padding-inline: clamp(1rem, 3vw, 2.5rem);
+  --doc-padding-block: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+[data-measure="print"] {
+  --doc-max-width: 215.9mm;
+  --doc-padding-inline: 12mm;
+  --doc-padding-block: 15mm;
+}
+
+[data-measure="prose"] {
+  --doc-max-width: min(75ch, 92vw);
+  --doc-padding-inline: clamp(1rem, 3vw, 2rem);
+  --doc-padding-block: clamp(1.25rem, 3vw, 2rem);
+}
+
+[data-measure="screen"] {
+  --doc-max-width: min(75rem, 92vw);
+  --doc-padding-inline: clamp(1rem, 3vw, 2.5rem);
+  --doc-padding-block: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+[data-measure="wide"] {
+  --doc-max-width: min(87.5rem, 96vw);     /* ~1400px — table-heavy docs */
+  --doc-padding-inline: clamp(1rem, 2vw, 2rem);
+  --doc-padding-block: clamp(1.25rem, 2vw, 2rem);
+}
+
+html {
+  background: color-mix(in srgb, var(--bg) 88%, var(--muted));
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Merriweather', 'Georgia', 'Times New Roman', serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+  color: var(--ink);
+  background: var(--bg);
+  max-width: var(--doc-max-width);
+  margin: 0 auto;
+  padding: var(--doc-padding-block) var(--doc-padding-inline);
+  min-height: 100vh;
+}
+
+/* Optional: narrow long prose inside wide/screen layouts */
+.prose-measure > p,
+.prose-measure > ul,
+.prose-measure > ol,
+.prose-measure > blockquote {
+  max-width: 75ch;
+}
+
+/* Dark theme backgrounds with gradient */
+[data-theme="neon-coral"] body,
+[data-theme="warm-charcoal"] body,
+[data-theme="forest-depth"] body,
+[data-theme="orchid-twilight"] body,
+[data-theme="neutral-balance"] body,
+[data-theme="solarised-warm"] body,
+[data-theme="electric-mint"] body,
+[data-theme="crimson-ember"] body,
+[data-theme="azure-neon"] body,
+[data-theme="golden-horizon"] body,
+[data-theme="magenta-dream"] body,
+[data-theme="citrus-burst"] body,
+[data-theme="professional-slate"] body,
+[data-theme="corporate-navy"] body {
+  background: radial-gradient(circle at 10% -10%, var(--primary-soft), transparent 35rem),
+              radial-gradient(circle at 90% 0%, rgba(34, 211, 238, 0.04), transparent 30rem),
+              linear-gradient(180deg, var(--surface) 0%, var(--bg) 50%, var(--bg) 100%);
+}
+
+/* ============================================
+   VIBRANT THEME TYPOGRAPHY ENHANCEMENTS
+   Bold, gradient text, dramatic shadows
+   ============================================ */
+
+/* Electric Mint - Tech/Cyber feel */
+[data-theme="electric-mint"] body {
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="electric-mint"] .header h1 {
+  font-size: 28pt;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--cyan) 50%, var(--primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 40px var(--primary-soft), 0 0 80px rgba(80, 255, 176, 0.3);
+}
+
+[data-theme="electric-mint"] h2 {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 13pt;
+}
+
+/* Crimson Ember - Bold fire feel */
+[data-theme="crimson-ember"] body {
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+[data-theme="crimson-ember"] .header h1 {
+  font-size: 28pt;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  background: linear-gradient(180deg, var(--primary) 0%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(255, 90, 90, 0.5), 0 4px 14px rgba(0,0,0,0.4);
+}
+
+[data-theme="crimson-ember"] h2 {
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* Azure Neon - Cyberpunk terminal */
+[data-theme="azure-neon"] body {
+  font-family: 'JetBrains Mono', 'Fira Code', 'SF Mono', 'Consolas', monospace;
+  letter-spacing: -0.01em;
+}
+
+[data-theme="azure-neon"] .header h1 {
+  font-size: 26pt;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--primary);
+  text-shadow: 0 0 10px var(--primary), 0 0 40px var(--primary), 0 0 80px rgba(80, 208, 255, 0.4);
+  text-transform: uppercase;
+}
+
+[data-theme="azure-neon"] h2 {
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 11pt;
+}
+
+/* Golden Horizon - Luxury gold feel */
+[data-theme="golden-horizon"] body {
+  font-family: 'Playfair Display', 'Georgia', 'Times New Roman', serif;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="golden-horizon"] .header h1 {
+  font-size: 32pt;
+  font-weight: 700;
+  font-style: italic;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--amber) 50%, #fff8e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 20px rgba(255, 200, 80, 0.3);
+  letter-spacing: 0.02em;
+}
+
+[data-theme="golden-horizon"] h2 {
+  font-family: 'Inter', 'SF Pro Display', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-size: 10pt;
+}
+
+[data-theme="golden-horizon"] .subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Magenta Dream - Creative/Artistic */
+[data-theme="magenta-dream"] body {
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+}
+
+[data-theme="magenta-dream"] .header h1 {
+  font-size: 30pt;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--violet) 50%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 60px rgba(255, 112, 176, 0.4);
+}
+
+[data-theme="magenta-dream"] h2 {
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* Citrus Burst - Maximum energy */
+[data-theme="citrus-burst"] body {
+  font-family: 'Inter', 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
+}
+
+[data-theme="citrus-burst"] .header h1 {
+  font-size: 30pt;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(200, 255, 64, 0.5), 0 4px 12px rgba(0,0,0,0.3);
+}
+
+[data-theme="citrus-burst"] h2 {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Vibrant themes - enhanced meta boxes */
+[data-theme="electric-mint"] .meta,
+[data-theme="crimson-ember"] .meta,
+[data-theme="azure-neon"] .meta,
+[data-theme="golden-horizon"] .meta,
+[data-theme="magenta-dream"] .meta,
+[data-theme="citrus-burst"] .meta {
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  font-size: 7.5pt;
+}
+
+/* Vibrant themes - number highlights */
+[data-theme="electric-mint"] .number,
+[data-theme="crimson-ember"] .number,
+[data-theme="azure-neon"] .number,
+[data-theme="golden-horizon"] .number,
+[data-theme="magenta-dream"] .number,
+[data-theme="citrus-burst"] .number {
+  font-weight: 800;
+  font-size: 1.1em;
+}
+
+/* ============================================
+   PROFESSIONAL THEME TYPOGRAPHY
+   Legible, executive, formal documents
+   ============================================ */
+
+/* Professional Slate - Executive business */
+[data-theme="professional-slate"] body {
+  font-family: 'Source Sans Pro', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  font-size: 10pt;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="professional-slate"] .header h1 {
+  font-family: 'Source Serif Pro', 'Georgia', 'Times New Roman', serif;
+  font-size: 22pt;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+  padding-bottom: 8px;
+}
+
+[data-theme="professional-slate"] h2 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 13pt;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+}
+
+[data-theme="professional-slate"] h3 {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Academic Parchment - Scholarly papers */
+[data-theme="academic-parchment"] body {
+  font-family: 'Merriweather', 'Georgia', 'Times New Roman', serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+}
+
+[data-theme="academic-parchment"] .header h1 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 24pt;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+[data-theme="academic-parchment"] .header .subtitle {
+  text-align: center;
+  font-style: italic;
+  font-size: 11pt;
+}
+
+[data-theme="academic-parchment"] h2 {
+  font-family: 'Source Sans Pro', 'Segoe UI', sans-serif;
+  font-size: 12pt;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+  margin-top: 18px;
+}
+
+[data-theme="academic-parchment"] h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  font-size: 11pt;
+}
+
+/* Corporate Navy - Boardroom presentations */
+[data-theme="corporate-navy"] body {
+  font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.45;
+}
+
+[data-theme="corporate-navy"] .header h1 {
+  font-family: 'IBM Plex Serif', 'Georgia', serif;
+  font-size: 20pt;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+[data-theme="corporate-navy"] .header .subtitle {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-size: 9pt;
+}
+
+[data-theme="corporate-navy"] h2 {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-weight: 600;
+  font-size: 11pt;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-secondary);
+  border-left: 3px solid var(--primary);
+  padding-left: 10px;
+}
+
+/* Editorial Ivory - Magazine/journalism */
+[data-theme="editorial-ivory"] body {
+  font-family: 'Literata', 'Georgia', 'Merriweather', serif;
+  font-size: 10.5pt;
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+}
+
+[data-theme="editorial-ivory"] .header h1 {
+  font-family: 'Literata', 'Georgia', serif;
+  font-size: 26pt;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+[data-theme="editorial-ivory"] .header .subtitle {
+  font-family: 'Literata', serif;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 12pt;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+[data-theme="editorial-ivory"] h2 {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 12pt;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-top: 20px;
+}
+
+[data-theme="editorial-ivory"] h3 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  color: var(--primary);
+}
+
+/* Professional themes - refined meta boxes */
+[data-theme="professional-slate"] .meta,
+[data-theme="academic-parchment"] .meta,
+[data-theme="corporate-navy"] .meta,
+[data-theme="editorial-ivory"] .meta {
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+[data-theme="corporate-navy"] .meta {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* Professional themes - elegant tables */
+[data-theme="professional-slate"] th,
+[data-theme="academic-parchment"] th,
+[data-theme="corporate-navy"] th,
+[data-theme="editorial-ivory"] th {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+[data-theme="academic-parchment"] th,
+[data-theme="editorial-ivory"] th {
+  font-family: 'Source Sans Pro', 'Inter', sans-serif;
+}
+
+/* Professional themes - refined cards */
+[data-theme="professional-slate"] .card,
+[data-theme="academic-parchment"] .card,
+[data-theme="corporate-navy"] .card,
+[data-theme="editorial-ivory"] .card {
+  border-radius: 6px;
+}
+
+[data-theme="academic-parchment"] .card,
+[data-theme="editorial-ivory"] .card {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Light theme backgrounds with subtle warmth */
+[data-theme="academic-parchment"] body,
+[data-theme="academic-cool"] body,
+[data-theme="academic-sepia"] body,
+[data-theme="academic-sage"] body,
+[data-theme="academic-rose"] body,
+[data-theme="academic-slate"] body,
+:root body {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 30%, var(--bg) 100%);
+}
+
+/* Academic variations - inherit same typography as academic-parchment */
+[data-theme="academic-cool"] body,
+[data-theme="academic-sepia"] body,
+[data-theme="academic-sage"] body,
+[data-theme="academic-rose"] body,
+[data-theme="academic-slate"] body,
+:root body {
+  font-family: 'Merriweather', 'Georgia', 'Times New Roman', serif;
+  font-size: 10.5pt;
+  line-height: 1.6;
+  letter-spacing: 0.005em;
+}
+
+[data-theme="academic-cool"] .header h1,
+[data-theme="academic-sepia"] .header h1,
+[data-theme="academic-sage"] .header h1,
+[data-theme="academic-rose"] .header h1,
+[data-theme="academic-slate"] .header h1,
+:root .header h1 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 24pt;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+[data-theme="academic-cool"] .header .subtitle,
+[data-theme="academic-sepia"] .header .subtitle,
+[data-theme="academic-sage"] .header .subtitle,
+[data-theme="academic-rose"] .header .subtitle,
+[data-theme="academic-slate"] .header .subtitle,
+:root .header .subtitle {
+  text-align: center;
+  font-style: italic;
+  font-size: 11pt;
+}
+
+[data-theme="academic-cool"] h2,
+[data-theme="academic-sepia"] h2,
+[data-theme="academic-sage"] h2,
+[data-theme="academic-rose"] h2,
+[data-theme="academic-slate"] h2,
+:root h2 {
+  font-family: 'Source Sans Pro', 'Segoe UI', sans-serif;
+  font-size: 12pt;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 4px;
+  margin-top: 18px;
+}
+
+[data-theme="academic-cool"] h3,
+[data-theme="academic-sepia"] h3,
+[data-theme="academic-sage"] h3,
+[data-theme="academic-rose"] h3,
+[data-theme="academic-slate"] h3,
+:root h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-weight: 600;
+  font-size: 11pt;
+}
+
+/* Academic variations - refined meta boxes */
+[data-theme="academic-cool"] .meta,
+[data-theme="academic-sepia"] .meta,
+[data-theme="academic-sage"] .meta,
+[data-theme="academic-rose"] .meta,
+[data-theme="academic-slate"] .meta,
+:root .meta {
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+}
+
+/* Academic variations - elegant tables */
+[data-theme="academic-cool"] th,
+[data-theme="academic-sepia"] th,
+[data-theme="academic-sage"] th,
+[data-theme="academic-rose"] th,
+[data-theme="academic-slate"] th,
+:root th {
+  font-family: 'Source Sans Pro', 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Academic variations - refined cards */
+[data-theme="academic-cool"] .card,
+[data-theme="academic-sepia"] .card,
+[data-theme="academic-sage"] .card,
+[data-theme="academic-rose"] .card,
+[data-theme="academic-slate"] .card,
+:root .card {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 6px;
+}
+
+[data-theme="editorial-ivory"] body {
+  background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 20%, #f8f5f0 100%);
+}
+
+/* ============================================
+   THEME 18: ACADEMIC COOL
+   Scholarly with cooler gray-beige tone
+   ============================================ */
+[data-theme="academic-cool"] {
+  --bg: #d5d8d0;
+  --surface: #e0e3db;
+  --surface-2: #e8ebe5;
+  --surface-3: #cbcec6;
+  --ink: #2a2c28;
+  --ink-secondary: #4a4c48;
+  --muted: #6a6c64;
+  --line: #c5c8c0;
+  --line-strong: #b8bbb4;
+  --primary: #4a5868;
+  --primary-hover: #3a4858;
+  --primary-soft: rgba(74, 88, 104, 0.12);
+  --coral: #8a6860;
+  --amber: #785a38;
+  --green: #5a6850;
+  --cyan: #506068;
+  --violet: #605860;
+  --success: #5a6850;
+  --warning: #785a38;
+  --error: #804840;
+  --info: #506068;
+  --shadow-soft: 0 12px 40px rgba(60, 62, 56, 0.1);
+  --shadow-card: 0 8px 24px rgba(60, 62, 56, 0.08);
+  color-scheme: light;
+}
+
+/* ============================================
+   THEME 19: ACADEMIC SEPIA
+   Deep vintage sepia, classic archive feel
+   ============================================ */
+[data-theme="academic-sepia"] {
+  --bg: #d0c8b8;
+  --surface: #d8d0c0;
+  --surface-2: #e0d8c8;
+  --surface-3: #c8c0b0;
+  --ink: #2a2420;
+  --ink-secondary: #4a4038;
+  --muted: #6a6058;
+  --line: #c0b8a8;
+  --line-strong: #b0a898;
+  --primary: #6b4030;
+  --primary-hover: #5a3020;
+  --primary-soft: rgba(107, 64, 48, 0.12);
+  --coral: #905040;
+  --amber: #785028;
+  --green: #506040;
+  --cyan: #405058;
+  --violet: #604850;
+  --success: #506040;
+  --warning: #785028;
+  --error: #804030;
+  --info: #405058;
+  --shadow-soft: 0 12px 40px rgba(48, 44, 40, 0.12);
+  --shadow-card: 0 8px 24px rgba(48, 44, 40, 0.1);
+  color-scheme: light;
+}
+
+/* ============================================
+   THEME 20: ACADEMIC SAGE
+   Green-gray scholarly, natural sciences feel
+   ============================================ */
+[data-theme="academic-sage"] {
+  --bg: #d0d5c8;
+  --surface: #d8ddd3;
+  --surface-2: #e0e5db;
+  --surface-3: #c8cdc3;
+  --ink: #242a20;
+  --ink-secondary: #404838;
+  --muted: #606858;
+  --line: #b8c0b0;
+  --line-strong: #a8b0a0;
+  --primary: #405838;
+  --primary-hover: #304828;
+  --primary-soft: rgba(64, 88, 56, 0.12);
+  --coral: #705848;
+  --amber: #605830;
+  --green: #405838;
+  --cyan: #385050;
+  --violet: #504048;
+  --success: #405838;
+  --warning: #605830;
+  --error: #784038;
+  --info: #385050;
+  --shadow-soft: 0 12px 40px rgba(48, 52, 44, 0.1);
+  --shadow-card: 0 8px 24px rgba(48, 52, 44, 0.08);
+  color-scheme: light;
+}
+
+/* ============================================
+   THEME 21: ACADEMIC ROSE
+   Warm rose tint, humanities and arts feel
+   ============================================ */
+[data-theme="academic-rose"] {
+  --bg: #e0d5d0;
+  --surface: #e8ded8;
+  --surface-2: #f0e6e0;
+  --surface-3: #d8ccc6;
+  --ink: #2a2424;
+  --ink-secondary: #4a4040;
+  --muted: #786868;
+  --line: #d0c4be;
+  --line-strong: #c4b8b0;
+  --primary: #784848;
+  --primary-hover: #683838;
+  --primary-soft: rgba(120, 72, 72, 0.12);
+  --coral: #a05050;
+  --amber: #886040;
+  --green: #586848;
+  --cyan: #486060;
+  --violet: #685060;
+  --success: #586848;
+  --warning: #886040;
+  --error: #904040;
+  --info: #486060;
+  --shadow-soft: 0 12px 40px rgba(56, 48, 48, 0.1);
+  --shadow-card: 0 8px 24px rgba(56, 48, 48, 0.08);
+  color-scheme: light;
+}
+
+/* ============================================
+   THEME 22: ACADEMIC SLATE
+   Cool blue-gray, STEM and technical papers
+   ============================================ */
+[data-theme="academic-slate"] {
+  --bg: #d0d5dc;
+  --surface: #d8dde4;
+  --surface-2: #e0e5ec;
+  --surface-3: #c8cdd4;
+  --ink: #20262c;
+  --ink-secondary: #384048;
+  --muted: #586068;
+  --line: #b8c0c8;
+  --line-strong: #a8b0b8;
+  --primary: #385068;
+  --primary-hover: #284058;
+  --primary-soft: rgba(56, 80, 104, 0.12);
+  --coral: #805050;
+  --amber: #705838;
+  --green: #486058;
+  --cyan: #385860;
+  --violet: #504860;
+  --success: #486058;
+  --warning: #705838;
+  --error: #804040;
+  --info: #385860;
+  --shadow-soft: 0 12px 40px rgba(48, 52, 56, 0.1);
+  --shadow-card: 0 8px 24px rgba(48, 52, 56, 0.08);
+  color-scheme: light;
+}
+
+/* Print styles for professional themes */
+@media print {
+  [data-theme="professional-slate"] body,
+  [data-theme="academic-parchment"] body,
+  [data-theme="corporate-navy"] body,
+  [data-theme="editorial-ivory"] body {
+    background: var(--surface);
+  }
+
+  [data-theme="academic-parchment"] .card,
+  [data-theme="academic-cool"] .card,
+  [data-theme="academic-sepia"] .card,
+  [data-theme="academic-sage"] .card,
+  [data-theme="academic-rose"] .card,
+  [data-theme="academic-slate"] .card,
+  [data-theme="editorial-ivory"] .card,
+  :root .card {
+    background: var(--surface-2);
+  }
+}
+
+/* Light theme backgrounds */
+[data-theme="sepia-warmth"] body {
+  background: radial-gradient(circle at 10% -10%, rgba(212, 200, 180, 0.15), transparent 35rem),
+              radial-gradient(circle at 90% 0%, rgba(232, 224, 208, 0.10), transparent 30rem),
+              linear-gradient(180deg, var(--surface) 0%, var(--bg) 50%, #f0e8d8 100%);
+}
+
+/* Header - Default (Academic Slate) */
+.header {
+  text-align: center;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.header h1 {
+  font-family: 'Playfair Display', 'Georgia', serif;
+  font-size: 24pt;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+[data-theme="neon-coral"] .header h1,
+[data-theme="warm-charcoal"] .header h1,
+[data-theme="forest-depth"] .header h1,
+[data-theme="orchid-twilight"] .header h1,
+[data-theme="neutral-balance"] .header h1,
+[data-theme="solarised-warm"] .header h1,
+[data-theme="electric-mint"] .header h1,
+[data-theme="crimson-ember"] .header h1,
+[data-theme="azure-neon"] .header h1,
+[data-theme="golden-horizon"] .header h1,
+[data-theme="magenta-dream"] .header h1,
+[data-theme="citrus-burst"] .header h1,
+[data-theme="professional-slate"] .header h1,
+[data-theme="corporate-navy"] .header h1 {
+  text-shadow: 0 0 20px var(--primary-soft);
+}
+
+.header .subtitle {
+  font-size: 11pt;
+  color: var(--muted);
+  text-align: center;
+  font-style: italic;
+}
+
+/* Meta box - Default (Academic Slate) */
+.meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding: 6px 10px;
+  background: var(--surface-2);
+  border-radius: 4px;
+  border: 1px solid var(--line);
+}
+
+/* Headings - Default (Academic Slate) */
+h2 {
+  font-family: 'Source Sans Pro', 'Segoe UI', sans-serif;
+  font-size: 12pt;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--primary);
+  margin-top: 18px;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--line);
+}
+
+h3 {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 11pt;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  margin-top: 10px;
+  margin-bottom: 4px;
+}
+
+/* Summary box */
+.summary-box {
+  background: var(--surface-2);
+  border-left: 3px solid var(--primary);
+  padding: 8px 12px;
+  margin: 10px 0;
+  font-size: 9pt;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Tables - Default (Academic Slate) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 8.5pt;
+  margin: 6px 0;
+}
+
+th {
+  font-family: 'Source Sans Pro', 'Inter', sans-serif;
+  background: var(--surface-2);
+  color: var(--ink-secondary);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-align: left;
+  padding: 5px 6px;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+td {
+  padding: 4px 6px;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+  color: var(--ink);
+}
+
+tr:nth-child(even) {
+  background: var(--surface);
+}
+
+/* Status classes */
+.status-done {
+  color: var(--green);
+  font-weight: 600;
+}
+
+.status-active {
+  color: var(--cyan);
+  font-weight: 600;
+}
+
+.status-pending {
+  color: var(--amber);
+}
+
+.number {
+  text-align: center;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+/* Cards - Default (Academic Slate) */
+.card {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+}
+
+.card h4 {
+  font-size: 9pt;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+
+.card ul {
+  margin-left: 12px;
+  font-size: 8pt;
+}
+
+.card li {
+  margin: 2px 0;
+  color: var(--ink);
+}
+
+/* Multi-column layouts */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+/* Highlight */
+.highlight {
+  background: var(--primary-soft);
+  color: var(--ink);
+  padding: 1px 3px;
+  border-radius: 2px;
+}
+
+/* Code */
+code {
+  background: var(--surface-3);
+  color: var(--cyan);
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 0.9em;
+}
+
+/* Footer */
+.footer {
+  margin-top: 15px;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 7.5pt;
+  color: var(--muted);
+  text-align: center;
+}
+
+/* Progress bar */
+.progress-bar {
+  display: inline-block;
+  width: 60px;
+  height: 6px;
+  background: var(--line);
+  border-radius: 3px;
+  overflow: hidden;
+  vertical-align: middle;
+  margin-left: 4px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--green);
+}
+
+/* Print styles */
+@media print {
+  html {
+    background: transparent;
+  }
+
+  body {
+    max-width: 215.9mm;
+    padding: 0;
+    background: var(--surface);
+    color: var(--ink);
+    min-height: auto;
+  }
+  
+  [data-theme="neon-coral"] body,
+  [data-theme="warm-charcoal"] body,
+  [data-theme="forest-depth"] body,
+  [data-theme="orchid-twilight"] body,
+  [data-theme="neutral-balance"] body,
+  [data-theme="solarised-warm"] body,
+  [data-theme="electric-mint"] body,
+  [data-theme="crimson-ember"] body,
+  [data-theme="azure-neon"] body,
+  [data-theme="golden-horizon"] body,
+  [data-theme="magenta-dream"] body,
+  [data-theme="citrus-burst"] body,
+  [data-theme="professional-slate"] body,
+  [data-theme="corporate-navy"] body,
+  [data-theme="sepia-warmth"] body {
+    background: var(--surface);
+  }
+}
+
+/* Page setup for letter size */
+@page {
+  size: letter;
+  margin: 15mm 12mm;
+}
+
+/* ============================================
+   MOTION LAYER — wired from base/tokens-motion.css
+   Additive only: no geometry changes, no entrance animations on static docs.
+   Gives the single-link path living hover/focus without altering layouts.
+   ============================================ */
+a { transition: color var(--duration-fast) var(--ease-out); }
+:root .card { transition: transform var(--duration-fast) var(--ease-out),
+                          box-shadow var(--duration-fast) var(--ease-out),
+                          border-color var(--duration-fast) var(--ease-out); }
+:root .card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px -16px color-mix(in srgb, var(--ink) 22%, transparent); }
+tbody tr { transition: background-color var(--duration-fast) var(--ease-out); }
+tbody tr:hover { background: color-mix(in srgb, var(--primary) 6%, transparent); }
+button, .btn, input[type="submit"], input[type="button"] { transition: var(--transition-colors); }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+
+/* Signal Slate Prism - Card Component */
+
+.card {
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(216, 225, 234, 0.94);
+  box-shadow: var(--shadow-card);
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(216, 225, 234, 0.94);
+  box-shadow: var(--shadow-card);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+}
+
+/* Card variants */
+.evidence-card {
+  border-left: 6px solid var(--blue);
+  background: linear-gradient(90deg, rgba(37, 99, 235, 0.08), rgba(255, 255, 255, 0.94) 24%);
+}
+
+.risk-card {
+  border-left: 6px solid var(--rose);
+  background: linear-gradient(90deg, rgba(225, 29, 72, 0.07), rgba(255, 255, 255, 0.94) 24%);
+}
+
+/* Grid layouts for cards */
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1024px) {
+  .cols-4,
+  .cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .cols-4,
+  .cols-3,
+  .cols-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Signal Slate Prism - Badge Component */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 950;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.badge.blue {
+  color: var(--blue);
+  background: rgba(37, 99, 235, 0.09);
+  border-color: rgba(37, 99, 235, 0.20);
+}
+
+.badge.cyan {
+  color: var(--cyan);
+  background: rgba(8, 145, 178, 0.10);
+  border-color: rgba(8, 145, 178, 0.22);
+}
+
+.badge.amber {
+  color: var(--amber);
+  background: rgba(217, 119, 6, 0.11);
+  border-color: rgba(217, 119, 6, 0.24);
+}
+
+.badge.green {
+  color: var(--green);
+  background: rgba(5, 150, 105, 0.10);
+  border-color: rgba(5, 150, 105, 0.22);
+}
+
+.badge.rose {
+  color: var(--rose);
+  background: rgba(225, 29, 72, 0.09);
+  border-color: rgba(225, 29, 72, 0.20);
+}
+
+.badge.violet {
+  color: var(--violet);
+  background: rgba(124, 58, 237, 0.09);
+  border-color: rgba(124, 58, 237, 0.20);
+}
+
+/* Signal Slate Prism - Metric Component */
+
+.metric {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 14px;
+}
+
+.metric span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.metric strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink);
+  font-size: clamp(22px, 3vw, 32px);
+  letter-spacing: -0.05em;
+}
+
+/* Signal Slate Prism - Table Component */
+
+.table-wrap {
+  overflow: auto;
+  border-radius: 18px;
+  border: 1px solid var(--line);
+  background: #fff;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+th {
+  color: var(--slate);
+  background: var(--surface-2);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+td {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+td strong {
+  color: var(--ink);
+}
+
+    </style>
+  <style>
+    body { background: var(--bg); color: var(--ink); font-family: var(--font-body); }
+    .page { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
+    .hero { padding: 40px 0 8px; border-bottom: 2px solid var(--line); margin-bottom: 28px; }
+    .hero h1 { font-size: clamp(30px, 5vw, 52px); letter-spacing: -0.045em; margin: 0 0 6px; line-height: 1.05; }
+    .hero .role { font-size: clamp(17px, 2.4vw, 22px); color: var(--muted); margin-bottom: 12px; font-weight: 600; }
+    .hero .tagline { font-size: 17px; color: var(--muted); max-width: 700px; line-height: 1.6; }
+    .section { margin-bottom: 36px; }
+    .section h2 { font-size: 24px; letter-spacing: -0.03em; margin: 0 0 4px; }
+    .section .subtitle { color: var(--muted); margin-bottom: 16px; font-size: 15px; }
+    .card { padding: 20px; margin-bottom: 16px; }
+    .card h3 { margin: 0 0 6px; font-size: 18px; }
+    .card p { color: var(--muted); font-size: 14.5px; line-height: 1.65; margin: 0; }
+    .timeline { border-left: 2px solid var(--line); padding-left: 20px; margin-left: 6px; }
+    .timeline .item { position: relative; padding-bottom: 18px; }
+    .timeline .item::before { content: ""; position: absolute; left: -26px; top: 5px; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
+    .timeline .item .when { color: var(--muted); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+    .timeline .item h4 { margin: 3px 0 4px; font-size: 17px; }
+    .timeline .item p { color: var(--muted); font-size: 14.5px; line-height: 1.55; margin: 0; }
+    .kicker { color: var(--primary); font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; }
+    .muted-note { font-size: 12.5px; color: var(--muted); margin-top: 10px; line-height: 1.5; }
+    .glossary { background: var(--surface-3); border: 1px solid var(--line); padding: 16px 20px; margin-top: 20px; }
+    .glossary h3 { margin: 0 0 8px; font-size: 15px; }
+    .glossary p { font-size: 13.5px; color: var(--muted); line-height: 1.55; margin: 0 0 6px; }
+    .badge { font-weight: 600; }
+    .badge.green { background: var(--primary-soft); color: var(--primary); border-color: var(--line); }
+    .badge.blue, .badge.cyan { background: var(--primary-soft); color: var(--primary); border-color: var(--line); }
+    @media (max-width: 720px) { .grid.cols-2, .grid.cols-4 { grid-template-columns: 1fr; gap: 10px; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- HERO -->
+    <header class="hero">
+      <h1>Reinaldo Viccini</h1>
+      <div class="role">Quality &amp; Engineering Leader — AI-Enhanced Quality Systems</div>
+      <p class="tagline">
+        I build quality systems — and I lead the people and programs that run them. 20+ years
+        leading teams and a company (former CEO/GM: a US$20M budget, 350 + 150 people, and joint
+        ventures with Ford, Iveco, Mercedes-Benz and GM). Today I own platform QA for 48 tenants
+        of a global industrial platform — including Grundfos, Sulzer and Wilo — with an
+        AI-augmented pipeline that turns a Jira ticket into a tested spec in minutes.
+      </p>
+    </header>
+
+    <!-- METRICS -->
+    <section class="section">
+      <p class="subtitle">Leadership at scale — the numbers behind the arc.</p>
+      <div class="grid cols-4">
+        <div class="metric"><span>Budget managed</span><strong>US$20M</strong></div>
+        <div class="metric"><span>People led (direct + indirect)</span><strong>350 + 150</strong></div>
+        <div class="metric"><span>Company growth</span><strong>$2M → $20M</strong></div>
+        <div class="metric"><span>Joint ventures</span><strong>Ford · Iveco · Mercedes-Benz · GM</strong></div>
+      </div>
+      <p class="subtitle" style="margin-top: 18px;">Quality engineering today.</p>
+      <div class="grid cols-4">
+        <div class="metric"><span>Product tenants</span><strong>48</strong></div>
+        <div class="metric"><span>Page Object Models</span><strong>70+</strong></div>
+        <div class="metric"><span>Historical tickets analyzed</span><strong>728</strong></div>
+        <div class="metric"><span>Repro steps recovered</span><strong>1.1% → 80%</strong></div>
+      </div>
+      <div class="grid cols-4" style="margin-top: 10px;">
+        <div class="metric"><span>Error signatures classified</span><strong>436</strong></div>
+        <div class="metric"><span>Unaccounted</span><strong>0</strong></div>
+        <div class="metric"><span>QA+AI roles open (US)</span><strong>11,000+</strong></div>
+        <div class="metric"><span>Recovery precision</span><strong>75–85%</strong></div>
+      </div>
+      <p class="muted-note">Sources: my ai-ops workspace (Jan–Sep 2026) and LinkedIn Jobs (US), 2026-09-01. A <i>tenant</i> is one customer's separate copy of the product.</p>
+    </section>
+
+    <!-- TRAJECTORY -->
+    <section class="section">
+      <h2>Trajectory</h2>
+      <p class="subtitle">Discipline, then business, then software — one thread: quality.</p>
+      <div class="timeline">
+        <div class="item">
+          <span class="when">Industrial · TQM</span>
+          <h4>Continuous Improvement Lead</h4>
+          <p>Led TQM initiatives with Ford, Iveco, and Mercedes-Benz. TQM (Total Quality Management) is the factory discipline of preventing defects through standards and feedback loops — the same mindset I now apply to software and to AI. APQP, 5S, and lean verification are the tools I learned there.</p>
+        </div>
+        <div class="item">
+          <span class="when">Leadership · CEO</span>
+          <h4>Former CEO</h4>
+          <p>Led a company for two decades — grew it from US$2M to US$20M and built international partnerships, including a month-long solo sourcing trip to China and a US$16M export order in the Dominican Republic. It taught me that quality must serve the business outcome — velocity, cost, and trust — not just the checklist.</p>
+        </div>
+        <div class="item">
+          <span class="when">Community · 2015–2018</span>
+          <h4>Founding Executive Director — Corporación Recrecimiento</h4>
+          <p>Founded and led a coalition that helped 100+ small-business owners displaced from Venezuela rebuild in Colombia, under real personal risk — the work that seeded my reinvention.</p>
+        </div>
+        <div class="item">
+          <span class="when">Software QA · AI (current)</span>
+          <h4>Quality Engineering Lead — AI-Enhanced Quality Systems</h4>
+          <p>Built the operating system for QA: a workspace where AI agents do the work under my rules and my checks, across 48 product tenants — including Grundfos, Sulzer, Franklin Electric, Wilo and Wilfley.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHAT I BUILT -->
+    <section class="section">
+      <h2>What I built</h2>
+      <p class="subtitle">The systems, not the scripts.</p>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <span class="kicker">Automation pipeline</span>
+          <h3>Ticket → Analysis → Spec → Dashboard</h3>
+          <p>An end-to-end pipeline that turns a Jira bug report into a written analysis, executable test cases, a Playwright test spec, and a dashboard — in minutes instead of days. Playwright is a tool that drives a real browser to test what a user sees.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Agentic workspace</span>
+          <h3>The workspace that runs the AI</h3>
+          <p>A multi-runtime workspace — it works with Claude, Cursor, Codex, and OpenCode — with real memory: every ticket leaves a reusable learning. The work compounds instead of evaporating between sessions.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Observability</span>
+          <h3>Reads raw telemetry</h3>
+          <p>Classified 436 distinct error signatures with zero unaccounted across 8 environments. Traced one stale browser session to 92% of an environment's error log — evidence, not guesses. Telemetry is what the system's own logs and monitors record about itself.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Verification engineering</span>
+          <h3>AI that audits itself</h3>
+          <p>Reviewing tools that try to prove my own conclusions wrong, run before anything is filed. They have caught real over-claims in my own work — that was the point.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVIDENCE HIGHLIGHTS -->
+    <section class="section">
+      <h2>Proof it works</h2>
+      <p class="subtitle">Numbers with a source.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>1.1% → 80% reproducible steps</h3>
+          <p>Analyzed 728 historical bug tickets (2022–2026). Built tooling that recovers reproducible steps for ~80% of them — up from 1.1% documented — at 75–85% precision against ground truth. A reproducible step is a step a human or an automated test can repeat to see the bug again.</p>
+        </div>
+        <div class="card">
+          <h3>A "fix" that was never deployed</h3>
+          <p>Traced a configuration change to a file upload followed by zero deploys — proven through system monitoring, not guesses. The fix was live nowhere.</p>
+        </div>
+        <div class="card">
+          <h3>92% of an env's log = one stale session</h3>
+          <p>Traced most of an environment's error log to one old browser session — an active person in another timezone, not a robot, not an intrusion. One conversation cleared 92% of the noise without touching code.</p>
+        </div>
+        <div class="card">
+          <h3>An audit that reviewed my own tickets</h3>
+          <p>Ran 7 adversarial reviews — each one's job was to prove my filed bug reports wrong. All 7 held up; fixes were still applied where the reviews found weaker wording. The verification culture is the deliverable.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section class="section">
+      <h2>Case studies</h2>
+      <p class="subtitle">Problem → action → result.</p>
+
+      <p class="subtitle" style="margin-top:6px;"><b>Leadership</b></p>
+      <div class="grid cols-2">
+        <div class="card">
+          <span class="kicker">Leadership · Governance</span>
+          <h3>Built a QA function from zero — and made it the release gate</h3>
+          <p><b>Problem:</b> no single owner for quality across a multi-tenant platform; releases moved on inconsistent checks. <b>Action:</b> set the strategy, standards and release gates; defined a 5-dimensional quality model (ISO/IEC 25010); built the team and the tooling that enforce it. <b>Result:</b> one accountable quality function across 48 tenants and 8 environments, with PROMOTE/HOLD/ROLLBACK gates and a human review gate on all AI output.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Executive leadership</span>
+          <h3>Led a company from US$2M to US$20M — and into international markets</h3>
+          <p><b>Problem:</b> scale a manufacturer and open new markets. <b>Action:</b> built and led a multidisciplinary team (350 direct + 150 indirect), ran a US$20M budget, formed joint ventures with Ford, Iveco, Mercedes-Benz and GM, and sourced partners abroad — a month in China alone. <b>Result:</b> US$2M→US$20M, #1 supplier to a national transport fund, and a US$16M export order in the Dominican Republic.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Community leadership</span>
+          <h3>Led a coalition that rebuilt 100+ displaced businesses</h3>
+          <p><b>Problem:</b> small-business owners displaced from Venezuela, arriving with broken companies and no local network. <b>Action:</b> founded and led Corporación Recrecimiento — organized the group, kept it moving, and carried real personal risk to hold it together. <b>Result:</b> 100+ businesses re-established in Colombia — and the work that seeded my own reinvention.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Leadership · Team building</span>
+          <h3>Built and led teams in every context</h3>
+          <p><b>Different missions, same act:</b> bring people together, give them a direction, and hold them to it. From a manufacturing company (350 direct + 150 indirect) to joint ventures with global OEMs (Ford, Iveco, Mercedes-Benz, GM), a Rotary chapter, and a coalition of 100+ entrepreneurs at Corporación Recrecimiento.</p>
+        </div>
+      </div>
+
+      <p class="subtitle" style="margin-top:18px;"><b>Engineering depth</b></p>
+      <div class="grid cols-2">
+        <div class="card">
+          <span class="kicker">AI pipeline</span>
+          <h3>From a Jira ticket to a Playwright spec in minutes</h3>
+          <p><b>Problem:</b> a defect backlog of ~1,000 tickets, of which I analyzed 728 — most with no reproducible steps. <b>Action:</b> built a 7-stage AI pipeline (ticket → analysis → test cases → spec → dashboard) behind a mandatory human review gate. <b>Result:</b> reproducible steps for ~80% of tickets (up from 1.1%), at 75–85% precision, cycle time cut ~55% — zero auto-committed tests.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Observability</span>
+          <h3>One stale session was 92% of an environment's error log</h3>
+          <p><b>Problem:</b> an environment drowning in "errors." <b>Action:</b> read the raw telemetry instead of triaging symptom by symptom. <b>Result:</b> traced 92% of the log to a single old browser session — an active person in another timezone, not a robot or an intrusion. One conversation cleared the noise without touching code.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Root cause</span>
+          <h3>Found the real cause in the code, not the UI</h3>
+          <p><b>Problem:</b> a recurring cross-tenant failure that surfaced only as sporadic UI symptoms. <b>Action:</b> read the deployed source instead of trusting the screen. <b>Result:</b> located the exact shared code path — and, separately, proved a configuration "fix" had been uploaded but never deployed. Evidence a status field alone would have hidden.</p>
+        </div>
+        <div class="card">
+          <span class="kicker">AI assurance</span>
+          <h3>I audit AI output — adversarially, at scale</h3>
+          <p><b>Method:</b> independent adversarial auditors whose only job is to refute a claim against real source code and real data; mandatory gates that verify a claim before it's filed; human-in-the-loop on every outward action. <b>Evidence:</b> 7 adversarial audits of filed work (all corrected), 18 more on internal context, and a standing rule — "audit the artifact, not the exit code." An over-claim was caught and corrected before it reached a customer.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MARKET FIT -->
+    <section class="section">
+      <h2>Where this fits the market</h2>
+      <p class="subtitle">Measured on LinkedIn Jobs (US), 2026-09-01.</p>
+      <table class="table">
+        <thead>
+          <tr><th>Role</th><th>Open positions</th><th>Why I fit</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Senior/Lead QA Engineer — AI</td><td><span class="badge green">11,000+</span></td><td>Playwright/TypeScript + AI + team leadership — my exact stack</td></tr>
+          <tr><td>SDET — AI/ML</td><td>High (10s of thousands incl. AI)</td><td>Framework + Page Object Models + spec generator. SDET = a test engineer who codes like a developer.</td></tr>
+          <tr><td>AI Evaluation Engineer</td><td>Premium (~1,000+ at AI labs)</td><td>Adversarial audits + verifying the artifact, not the exit code</td></tr>
+          <tr><td>AI Validation/Assurance (industrial)</td><td>Emerging</td><td>TQM/APQP + AI — few people hold both</td></tr>
+        </tbody>
+      </table>
+      <p class="muted-note">Search "QA Engineer AI" lands ~11,000+ postings vs ~1,000+ for plain "QA Engineer" — the AI qualifier multiples the market ~11×.</p>
+    </section>
+
+    <!-- WHAT I'M LOOKING FOR -->
+    <section class="section">
+      <h2>What I'm looking for</h2>
+      <div class="card">
+        <p><b>Quality leadership, remote-first.</b> Head of QA / Director of Quality / QA Manager — owning the strategy, standards, release gates and the team that runs them, not an individual-contributor seat. I work remotely (GMT-5, ideal for US hours) and travel as needed. Open to full-time and to fractional/advisory engagements.</p>
+      </div>
+    </section>
+
+    <!-- AI STANCE -->
+    <section class="section">
+      <h2>My AI stance</h2>
+      <div class="card">
+        <p>AI is a directed tool, not a magic wand. I work with Claude, Cursor, OpenCode, and DeepSeek daily to design modular test frameworks and accelerate analysis. Because I build AI systems myself, I know their failure modes — my rule is verification: check what was actually produced, not just whether the command ended green, and never file a bug I haven't confirmed isn't already fixed. An external verifier once proved my +231% backtest was survivorship bias — the correction became the project's most valuable result. A backtest is testing a strategy against past data; survivorship bias means the data only contains the winners, making results look better than they were.</p>
+      </div>
+    </section>
+
+    <!-- WRITING -->
+    <section class="section">
+      <h2>Writing</h2>
+      <p class="subtitle">I think in public — mostly on leadership, reinvention and quality.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <span class="kicker">LinkedIn · 2026</span>
+          <h3>"I govern AI. Here is the constitution."</h3>
+          <p>On AI governance as a quality problem — the rules, memory and verification that keep an AI system honest, told from a real running system. ⬜ link pending</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Medium · 2023</span>
+          <h3>"From CEO to IT Trainee" &amp; the "Adventures of a Second Career in IT" series</h3>
+          <p>On career reinvention, resilience and mentorship — including <i>"The Ripple Effect of Kindness"</i>. ⬜ link pending</p>
+        </div>
+        <div class="card">
+          <span class="kicker">LinkedIn</span>
+          <h3>"AGENTS.md — the brains of my system" &amp; leadership essays</h3>
+          <p>On agentic/AI systems, leadership, work ethic and remote-first careers. ⬜ link pending</p>
+        </div>
+        <div class="card">
+          <span class="kicker">Essay · forthcoming</span>
+          <h3>"We Rebuilt Each Other"</h3>
+          <p>The story of Corporación Recrecimiento — how a group of displaced entrepreneurs rebuilt together, and how that seeded my reinvention.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section">
+      <h2>Skills</h2>
+      <div class="grid cols-2">
+        <div class="card"><h3>QA Automation</h3><p>Playwright · TypeScript/JavaScript · modular test frameworks · Page Object Models · spec generation from the pipeline</p></div>
+        <div class="card"><h3>Agentic Systems</h3><p>Memory and knowledge architecture · agent orchestration · verification gates · multi-runtime portability</p></div>
+        <div class="card"><h3>Observability</h3><p>Elastic/Kibana · APM (performance monitoring) · log forensics · incident reconstruction · telemetry-driven triage</p></div>
+        <div class="card"><h3>Quality Systems</h3><p>TQM · APQP · 5S · lean verification · AI compliance and assurance</p></div>
+        <div class="card"><h3>International Business</h3><p>Cross-border partnerships and deals — China, the Dominican Republic and North America; comfortable operating across cultures.</p></div>
+        <div class="card"><h3>Team &amp; Group Creation</h3><p>Built teams, a Rotary chapter, joint-venture consortia and a community coalition from zero — leading people across company, industry and community.</p></div>
+      </div>
+    </section>
+
+    <!-- FOOTER + GLOSSARY -->
+    <footer>
+      <div class="hero" style="border-top: 2px solid var(--border); border-bottom: none; padding-bottom: 10px; margin-bottom: 8px;">
+        <div class="role">Let's talk.</div>
+        <p class="tagline">I work remotely (GMT-5) and travel as needed. If you're building a QA organization that treats AI as a validated tool — or you need senior quality leadership — let's talk.</p>
+        <p class="muted-note">Portfolio 2026-09-25 · Data: ai-ops workspace (Jan–Sep 2026) + LinkedIn Jobs (US).</p>
+      </div>
+      <div class="glossary">
+        <h3>Glossary</h3>
+        <p><b>Tenant</b> — one customer's separate copy of the product (I covered 48). · <b>Page Object Model (POM)</b> — a reusable template that describes one screen, so tests never repeat its details. · <b>Playwright</b> — a tool that drives a real browser to test what users see. · <b>Reproducible step</b> — a step a human or automated test can repeat to see the bug again. · <b>Observability/telemetry</b> — what the system's own logs and monitors record about itself. · <b>Adversarial audit</b> — a review whose only job is to prove something wrong. · <b>SDET</b> — a test engineer who codes like a developer. · <b>Backtest</b> — testing a strategy against past data. · <b>Survivorship bias</b> — data that only contains winners, making results look better than they were.</p>
+        <p>Full workspace glossary: GLOSSARY.md.</p>
+      </div>
+    </footer>
+
+  </div>
+</body>
+</html>
